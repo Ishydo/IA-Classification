@@ -10,6 +10,11 @@ from sklearn.linear_model import SGDClassifier
 from sklearn.model_selection import GridSearchCV
 
 # Based on http://scikit-learn.org/stable/tutorial/text_analytics/working_with_text_data.html
+# All refereces used are here (web project) : https://linkyou.srvz-webapp.he-arc.ch/collection/ai-classification-scikit-ressources-10
+
+
+# Set to True for a detailed step by step output
+DETAILED_OUTPUT = False
 
 ############################################################################
 #################### STEP 1 | Loading datasets #############################
@@ -67,7 +72,6 @@ X_train_counts = count_vect.fit_transform(reviews_train.data)
 ############################################################################
 ###################### STEP 3 | Indexation Ef/idf ##########################
 ############################################################################
-
 '''
 Counting occurences is a good thing but longer documents will have higher
 average count values than shorter documents (even with same topics).
@@ -90,7 +94,6 @@ X_train_tfidf = tfidf_transformer.fit_transform(X_train_counts)
 ############################################################################
 ######################## STEP 4 | Classification ###########################
 ############################################################################
-
 '''
 Now that we have the features we can train the classifier to predict the character of a review.
 
@@ -115,26 +118,30 @@ for doc, category in zip(docs_new, predicted):
 ############################################################################
 ######################## STEP 5 | Evaluation ###########################
 ############################################################################
+'''
+We can finally evaluate the predictive accuracy of the moel.
+
+http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html
+'''
 
 docs_test = reviews_test.data # Test documents
 
 # A pipeline with MultinomialNB (naïve Bayes)
 text_clf_NB = Pipeline([('vect', CountVectorizer()), ('tfidf', TfidfTransformer()), ('clf', MultinomialNB()),])
-text_clf_NB = text_clf_NB.fit(reviews_train.data, reviews_train.target)
-predicted = text_clf_NB.predict(docs_test)
-print(np.mean(predicted == reviews_test.target))
 
 # A pipeline with support vector machine (SVM)
 text_clf_SGDC = Pipeline([('vect', CountVectorizer()),('tfidf', TfidfTransformer()),('clf', SGDClassifier(loss='hinge', penalty='l2', alpha=1e-3, n_iter=5, random_state=42)),])
+
+text_clf_NB = text_clf_NB.fit(reviews_train.data, reviews_train.target)
 _ = text_clf_SGDC.fit(reviews_train.data, reviews_train.target)
-predicted = text_clf_SGDC.predict(docs_test)
-print(np.mean(predicted == reviews_test.target))
 
-# Metrics
-print(metrics.classification_report(reviews_test.target, predicted,
-    target_names=reviews_test.target_names))
+# Predictions with both models
+predicted_NB = text_clf_NB.predict(docs_test)
+predicted_SGDC = text_clf_SGDC.predict(docs_test)
 
-print(metrics.confusion_matrix(reviews_test.target, predicted))
+print("\nPrediction accuracies :")
+print("\tNaïve Bayes prediction \t : {0}".format(np.mean(predicted_NB == reviews_test.target)))
+print("\tSVM prediction \t\t : {0}".format(np.mean(predicted_SGDC == reviews_test.target)))
 
 
 ############################################################################
@@ -166,23 +173,34 @@ print("\nFound with the following parameters :\n")
 for param_name in sorted(parameters.keys()):
     print("\t%s: %r" % (param_name, gs_clf.best_params_[param_name]))
 
-# replaced prints
-# Debug prints
-'''
-print(reviews_train)
-print(reviews_train.target_names)
-print(len(reviews_train.data))
-print(len(reviews_train.filenames))
-print("\n".join(reviews_train.data[0].split("\n")[:3]))
-'''
 
-# vectorisation prints
-'''
-print(X_train_counts.shape)
-print(count_vect.vocabulary_.get(u'algorithm'))
-'''
+############################################################################
+####################### EVENTUAL OUTPUTS #############################
+############################################################################
 
-# tf-idf
-'''
-print(X_train_tfidf.shape)
-'''
+if DETAILED_OUTPUT:
+
+    print("\n\nSTEP 1 | Datasets loading outputs :")
+    print(reviews_train.target_names)
+    print(len(reviews_train.data))
+    print(len(reviews_train.filenames))
+    print("\n".join(reviews_train.data[0].split("\n")[:3]))
+
+    print("\n\nSTEP 2 | Vectorisation outputs :")
+    print(X_train_counts.shape)
+    print(count_vect.vocabulary_.get(u'algorithm'))
+
+
+    print("\n\nSTEP 3 | Indexation outputs :")
+    print(X_train_tfidf.shape)
+
+    print("\n\n+ | Metrics outputs :")
+    print("\n\nClassification report for Naïve Bayes")
+    print(metrics.classification_report(reviews_test.target, predicted_NB,target_names=reviews_test.target_names))
+    print("Confusion matrix for Naïve Bayes")
+    print(metrics.confusion_matrix(reviews_test.target, predicted_NB))
+
+    print("\n\nClassification report for SVM")
+    print(metrics.classification_report(reviews_test.target, predicted_SGDC,target_names=reviews_test.target_names))
+    print("Confusion matrix for SVM")
+    print(metrics.confusion_matrix(reviews_test.target, predicted_SGDC))
