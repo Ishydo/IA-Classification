@@ -1,0 +1,5 @@
+/20news-bydate-test
+/20news-bydate-train
+*.txt
+textwork.py
+*.pyc
