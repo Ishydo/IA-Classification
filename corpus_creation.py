@@ -15,7 +15,7 @@ target_folders =  ["classification/processed/reviews-train/neg",
                     ]
 
 # The type of text informations judged interesting (see any tagged file for example)
-interest_words = ["NOM", "ADJ", "VER"]
+interest_words = ["NOM", "ADJ", "VER", "ADV"]
 
 # Ratios of positives / negatives for training
 train_main_percentage = 0.8
