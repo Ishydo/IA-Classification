@@ -27,19 +27,15 @@ test_main_percentage = 1 - train_main_percentage
 test_pos_percentage = 0.5
 test_neg_percentage = 1 - test_pos_percentage
 
-# TODO: Tout ceci est une horreur
 def process_review_files(source_folder, target_folder, files):
     '''Process each files in the given folders'''
     for processed_file in files:
         with open("{0}/{1}".format(source_folder, processed_file), 'r') as input_f:
             strWords = ""
             for line in input_f:
-                for word in interest_words:
-                    if word in line:
+                if any(word in line for word in interest_words):
                         wordOfInterest = line.split("\t")[2]
-                        if "|" in wordOfInterest:
-                            wordOfInterest = wordOfInterest.split("|")[0]
-                        strWords += wordOfInterest
+                        strWords += wordOfInterest.split("|")[0] if "|" in wordOfInterest else wordOfInterest
         with open("{0}/processed_{1}".format(target_folder, processed_file), 'w') as output_f:
             output_f.write(strWords)
 
