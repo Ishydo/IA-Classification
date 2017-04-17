@@ -14,7 +14,7 @@ from sklearn.model_selection import GridSearchCV
 
 
 # Set to True for a detailed step by step output
-DETAILED_OUTPUT = False
+DETAILED_OUTPUT = True
 
 ############################################################################
 #################### STEP 1 | Loading datasets #############################
