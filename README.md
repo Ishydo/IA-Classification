@@ -7,7 +7,14 @@ Pour atteindre les objectifs du TP, deux scripts ont été développés. Ce sont
 
 ## Création des corpus
 
-Ce premier script ```corpus_creation.py``` permet de traiter et destribuer des fichiers positifs et négatifs afin de pouvoir les utiliser pour la classification. Cela se fait en fonction de certains pourcentage et en ne gardant que les types de mots qui nous intéressent.
+Ce premier script ```corpus_creation.py``` permet de traiter et destribuer des fichiers positifs et négatifs afin de pouvoir les utiliser pour la classification. Cela se fait en fonction de certains pourcentages (selon la donnée) et en ne gardant que les types de mots qui nous intéressent.
+
+### Rappel de la distribution
+
+Il y a 1000 fichiers de reviews positives et 1000 fichiers de reviews négatives soit un total de 2000 fichiers.
+
+* 80% de ces fichiers sont utilisés pour l'entraînement (soit 400 positifs et 400 négatifs)
+* 20% de ces fichiers sont utilisés pour les tests (soit 200 positits et 200 négatifs)
 
 ## Classification
 
@@ -21,9 +28,13 @@ Toutes les références utilisées peuvent être trouvées à l'adresse suivante
 
 ## Utilisation
 
+Pour la démonstration, les processed files ne sont pas généré par défaut, il faut donc d'abord exécuter le script de création des corpus avant de pouvoir exécuter le script de classification.
+
 ### 1. Préparation des fichiers et dossier
 
-Tous les fichiers nécessaires sont disponibles 
+Tous les fichiers nécessaires sont disponibles. Les dossiers se trouvant dans classification/processed sont vides par défaut et sont remplis par le script de création des corpus.
+
+Les fichiers dans corpus_example contiennt un exemple de corpus créé précédemment (au cas où).
 
 ### 2. Création des corpus
 
