@@ -32,9 +32,11 @@ Pour la démonstration, les processed files ne sont pas généré par défaut, i
 
 ### 1. Préparation des fichiers et dossier
 
-Tous les fichiers nécessaires sont disponibles. Les dossiers se trouvant dans classification/processed sont vides par défaut et sont remplis par le script de création des corpus.
+Tous les fichiers nécessaires sont disponibles. Les dossiers se trouvant dans ```classification/processed``` sont vides par défaut et sont remplis par le script de création des corpus.
 
-Les fichiers dans corpus_example contiennt un exemple de corpus créé précédemment (au cas où).
+Les fichiers dans ```corpus_example``` contiennt un exemple de corpus créé précédemment (au cas où) et sont présents uniquement à titre informatif.
+
+Les fichiers dans ```classification/tagged``` sont ceux fournis de base contenant les reviews.
 
 ### 2. Création des corpus
 
