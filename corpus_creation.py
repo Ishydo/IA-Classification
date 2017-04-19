@@ -84,6 +84,8 @@ if __name__ == '__main__':
     process_review_files(source_folders[1], target_folders[1], workingFilesPosTrain)
     process_review_files(source_folders[1], target_folders[3], workingFilesPosTest)
 
+    print("Files processed and transferred.")
+
     ############################################################################
     #################### INFORMATIVE OUTPUTS FOR TESTING #######################
     ############################################################################
