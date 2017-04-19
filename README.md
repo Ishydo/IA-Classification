@@ -43,17 +43,32 @@ Les fichiers dans ```classification/tagged``` sont ceux fournis de base contenan
 On lance simplement le script de création des corpus.
 
 ```
-python .\corpus_creation.py
+python corpus_creation.py
 ```
+
+Cela distribue le bon nombre de fichiers positifs et négatifs dans les bons dossiers.
 
 ### 3. Classification
 
 Lancez le script de classification.
 
 ```
-python .\TPClassification.py
+python TPClassification.py
+```
+
+Vous pouvez afficher moins d'informations en output en changeant la variable ```DETAILED_OUTPUT=False```
+
+## Commandes de test
+
+```
+git clone https://github.com/Ishydo/IA-Classification.git
+cd IA-Classification
+python corpus_creation.py
+python TPClassification.py
 ```
 
 ## Commentaires additionnels
 
 La partie optimisation ne fonctionne pas sur Windows (probablement à cause de l'utilisation de fork()).
+
+Il faut utiliser python une version de python >= 3 pour le support des caractères spéciaux !
