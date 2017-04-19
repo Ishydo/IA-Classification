@@ -2,8 +2,8 @@
 
 Pour atteindre les objectifs du TP, deux scripts ont été développés. Ce sont les suivants:
 
-* corpus_creation.py
-* TPClassification.py
+* ```corpus_creation.py```
+* ```TPClassification.py```
 
 ## Création des corpus
 
@@ -23,6 +23,8 @@ Toutes les références utilisées peuvent être trouvées à l'adresse suivante
 
 ### 1. Préparation des fichiers et dossier
 
+Tous les fichiers nécessaires sont disponibles 
+
 ### 2. Création des corpus
 
 On lance simplement le script de création des corpus.
@@ -38,3 +40,7 @@ Lancez le script de classification.
 ```
 python .\TPClassification.py
 ```
+
+## Commentaires additionnels
+
+La partie optimisation ne fonctionne pas sur Windows (probablement à cause de l'utilisation de fork()).
