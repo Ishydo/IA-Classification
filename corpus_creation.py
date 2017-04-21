@@ -39,8 +39,8 @@ def process_review_files(source_folder, target_folder, files):
         with open("{0}/processed_{1}".format(target_folder, processed_file), 'w') as output_f:
             output_f.write(strWords)
 
-if __name__ == '__main__':
 
+def main():
     print("Starting program")
 
     # All negative and positive files in source folders
@@ -61,16 +61,37 @@ if __name__ == '__main__':
     ############## RANDOM INDICES GENERATION FOR EACH CASE #####################
     ############################################################################
 
-    # Generate random list of indices for each training and testing cases
+    print("posTrainIndices {0}".format(posTrainIndices))
+    print("negTrainIndices {0}".format(negTrainIndices))
+
+    # Shuffled indices from
+    allPositiveIndices = [i for i in range(0, nbTotPosFiles)]
+    shuffledPositiveIndices = random.sample( allPositiveIndices, len(allPositiveIndices) )
+
+    allNegativeIndices = [i for i in range(0, nbTotNegFiles)]
+    shuffledNegativeIndices = random.sample( allNegativeIndices, len(allNegativeIndices) )
+
+    # Positive indices for test and train
+    randomPosTrainIndices = shuffledPositiveIndices[0:posTrainIndices]
+    randomPosTestIndices = shuffledPositiveIndices[posTrainIndices:]
+
+    # Negative indices for test and train
+    randomNegTrainIndices = shuffledNegativeIndices[0:negTrainIndices]
+    randomNegTestIndices = shuffledNegativeIndices[negTrainIndices:]
+
+
+    # Generate random list of indices for each training and testing cases (OVERFITTING RISK METHOD!!)
+    '''
     randomPosTrainIndices = random.sample(range(nbTotPosFiles), posTrainIndices) # Positive training indices
     randomNegTrainIndices = random.sample(range(nbTotNegFiles), negTrainIndices) # Negative training indices
 
     randomPosTestIndices = random.sample(range(nbTotPosFiles), posTestIndices) # Positive testing indices
     randomNegTestIndices = random.sample(range(nbTotNegFiles), negTestIndices) # Negative testing indices
-
+    '''
     ############################################################################
     ############## LIST OF FILES IN FUNCTION OF RANDOM INDICES #################
     ############################################################################
+
 
     workingFilesPosTrain = [posFiles[i] for i in randomPosTrainIndices] # Working files
     workingFilesNegTrain = [negFiles[i] for i in randomNegTrainIndices]
@@ -85,6 +106,7 @@ if __name__ == '__main__':
     process_review_files(source_folders[1], target_folders[3], workingFilesPosTest)
 
     print("Files processed and transferred.")
+
 
     ############################################################################
     #################### INFORMATIVE OUTPUTS FOR TESTING #######################
@@ -101,3 +123,7 @@ if __name__ == '__main__':
     print("{0} random indices generated for training negative.".format(len(randomNegTrainIndices)))
     print("{0} random indices generated for testing positive.".format(len(randomPosTestIndices)))
     print("{0} random indices generated for testing negative.".format(len(randomNegTestIndices)))
+
+
+if __name__ == '__main__':
+    main()
