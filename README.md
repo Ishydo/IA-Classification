@@ -13,7 +13,7 @@ Ce premier script ```corpus_creation.py``` permet de traiter et destribuer des f
 
 Il y a 1000 fichiers de reviews positives et 1000 fichiers de reviews négatives soit un total de 2000 fichiers.
 
-* 80% de ces fichiers sont utilisés pour l'entraînement (soit 400 positifs et 400 négatifs)
+* 80% de ces fichiers sont utilisés pour l'entraînement (soit 800 positifs et 800 négatifs)
 * 20% de ces fichiers sont utilisés pour les tests (soit 200 positits et 200 négatifs)
 
 ## Classification
