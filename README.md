@@ -13,7 +13,7 @@ Ce premier script ```corpus_creation.py``` permet de traiter et destribuer des f
 
 Il y a 1000 fichiers de reviews positives et 1000 fichiers de reviews négatives soit un total de 2000 fichiers.
 
-* 80% de ces fichiers sont utilisés pour l'entraînement (soit 400 positifs et 400 négatifs)
+* 80% de ces fichiers sont utilisés pour l'entraînement (soit 800 positifs et 800 négatifs)
 * 20% de ces fichiers sont utilisés pour les tests (soit 200 positits et 200 négatifs)
 
 ## Classification
@@ -43,17 +43,32 @@ Les fichiers dans ```classification/tagged``` sont ceux fournis de base contenan
 On lance simplement le script de création des corpus.
 
 ```
-python .\corpus_creation.py
+python3 corpus_creation.py
 ```
+
+Cela distribue le bon nombre de fichiers positifs et négatifs dans les bons dossiers.
 
 ### 3. Classification
 
 Lancez le script de classification.
 
 ```
-python .\TPClassification.py
+python3 TPClassification.py
+```
+
+Vous pouvez afficher moins d'informations en output en changeant la variable ```DETAILED_OUTPUT=False```
+
+## Commandes de test
+
+```
+git clone https://github.com/Ishydo/IA-Classification.git
+cd IA-Classification
+python3 corpus_creation.py
+python3 TPClassification.py
 ```
 
 ## Commentaires additionnels
 
 La partie optimisation ne fonctionne pas sur Windows (probablement à cause de l'utilisation de fork()).
+
+Il faut utiliser python une version de python >= 3 pour le support des caractères spéciaux !
